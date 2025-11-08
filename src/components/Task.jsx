@@ -7,7 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import { Divider } from "@mui/material";
 import Grid from "@mui/material/Grid";
-export default function Task() {
+export default function Task({title,description}) {
   return (
     <div>
       <Card
@@ -37,10 +37,10 @@ export default function Task() {
                 sx={{ margin: "0", color: "black" }}
                 variant={"h5"}
               >
-                the first task
+                {title}
               </Typography>
-              <Typography gutterBottom sx={{ margin: "0",fontFamily:'Lato-Bold' }} variant={"h6"}>
-                task details
+              <Typography gutterBottom sx={{ margin: "0 0 0 0",fontFamily:'Lato-Bold',lineHeight:'1.1',padding:'5px',textAlign:'start'}} variant={"h6"}>
+               {description}
               </Typography>
             </Grid>
             <Grid

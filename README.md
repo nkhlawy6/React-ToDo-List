@@ -1,16 +1,95 @@
-# React + Vite
+# 📝 To-Do List App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple and elegant **to-do list application** built with **React** and **Material UI**.  
+This app allows users to manage tasks efficiently — add, view,update, and mark them as completed, with a clean modern UI and custom fonts.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+- ✅ Add, view, and mark tasks as completed
+- 🧾 Each task has a title and description
+- 🎨 Custom theme with Material UI
+- 🖋️ External font (Lato) integrated via `@googlefonts/lato`
+- 📱 Responsive layout for all screen sizes
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🧩 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Technology                           | Purpose                 |
+| ------------------------------------ | ----------------------- |
+| **React**                            | Frontend library        |
+| **Material UI (MUI)**                | UI components & theming |
+| **@googlefonts/lato**                | External font           |
+| **JavaScript (ES6+)**                | Core logic              |
+
+---
+
+## 📦 Dependencies
+
+Make sure you install all required dependencies:
+
+```bash
+npm install
+Main Dependencies
+Package	Description
+react	Core React library
+@mui/material	Material UI components
+@mui/icons-material	Material UI icons
+@googlefonts/lato	Lato font for typography
+uuid Generates unique IDs for to-do items
+
+⚙️ Installation & Setup
+Clone the repository
+
+bash
+Copy code
+git clone https://github.com/nkhlawy6/React-ToDo-List.git
+Navigate into the project directory
+
+bash
+Copy code
+cd React-ToDo-List
+Install dependencies
+
+bash
+Copy code
+npm install
+Run the app
+
+bash
+Copy code
+npm start
+Open in your browser:
+👉 http://localhost:3000
+
+
+
+
+📸 Screenshots (optional)
+Add screenshots of your app UI here:
+
+Desktop View	Mobile View
+
+🧑‍💻 Author
+Your Mahmoud Ahmed Elnakhalwy
+📧 mahmoudelnakhlawy1@gmail.com
+🔗 https://github.com/nkhlawy6
+
+🪪 License
+This project is open-source and available under the MIT License.
+
+yaml
+Copy code
+
+---
+
+Would you like me to make a **shorter version** (for GitHub profile summaries), or keep this full detailed version?
+
+
+
+
+
+
+```
