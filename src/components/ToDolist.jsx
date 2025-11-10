@@ -1,14 +1,14 @@
+import { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
+ import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
- 
+
 import SendIcon from "@mui/icons-material/Send";
 
 import Typography from "@mui/material/Typography";
@@ -17,9 +17,9 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Task from "./Task";
 export default function ToDoList() {
-  const todos = [
+  const todosDataBase = [
     {
-      id:uuidv4(),
+      id: uuidv4(),
       title: "Buy groceries",
       description: "Milk, bread, eggs, and some fruits",
       isCompleted: false,
@@ -38,12 +38,25 @@ export default function ToDoList() {
       isCompleted: false,
     },
     {
-      id:uuidv4(),
+      id: uuidv4(),
       title: "Read a book",
       description: "Read 20 pages of 'Atomic Habits'",
       isCompleted: false,
     },
   ];
+  const [todos, setTodos] = useState(todosDataBase);
+  const [todoTitle, setTodoTitle] = useState("");
+
+  function handleSendClick() {
+    let newTodo = {
+      id: uuidv4(),
+      title: todoTitle,
+      description: "to Eslammmm",
+      isCompleted: false,
+    };
+    setTodos([...todos, newTodo]);
+    setTodoTitle("");
+  }
   console.log(todos);
   return (
     <>
@@ -84,7 +97,7 @@ export default function ToDoList() {
 
             {/* all tasks */}
             {todos.map((todo) => {
-              return<Task  key={todo.id}title={todo.title} description={todo.description} />
+              return <Task key={todo.id} todo={todo}   />;
             })}
             {/*---------end all tasks */}
 
@@ -92,6 +105,11 @@ export default function ToDoList() {
             <Grid container spacing={2}>
               <Grid size={8} sx={{}}>
                 <TextField
+                  value={todoTitle}
+                  onChange={(e) => {
+                    setTodoTitle(e.target.value);
+                    console.log(todoTitle);
+                  }}
                   sx={{
                     width: "100%",
                   }}
@@ -102,6 +120,9 @@ export default function ToDoList() {
               </Grid>
               <Grid size={4} sx={{}}>
                 <Button
+                  onClick={() => {
+                    handleSendClick();
+                  }}
                   sx={{ width: "100%", height: "100%" }}
                   variant="contained"
                   endIcon={<SendIcon />}

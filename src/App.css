@@ -23,3 +23,10 @@
   font-family: Lato-Bold;
   src: url("/fonts/Lato-Bold.ttf");
 }
+
+.taskDone {
+  background-color: #d3ffd3;
+  text-decoration: line-through;
+  opacity: 0.6;
+  box-shadow: 0 0 10px rgba(0, 128, 0, 0.4);
+}

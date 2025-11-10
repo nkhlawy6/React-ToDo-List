@@ -7,7 +7,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import { Divider } from "@mui/material";
 import Grid from "@mui/material/Grid";
-export default function Task({title,description}) {
+export default function Task({todo}) {
+
+  function handleTaskDone(){
+      
+ 
+  
+  }
   return (
     <div>
       <Card
@@ -18,7 +24,7 @@ export default function Task({title,description}) {
           color: "primary.main",
         }}
       >
-        <CardContent sx={{ textAlign: "center" }}>
+        <CardContent sx={{ textAlign: "center" }} className={`${todo.isCompleted?'taskDone':''}`}>
           <Grid
             container
             spacing={2}
@@ -37,10 +43,10 @@ export default function Task({title,description}) {
                 sx={{ margin: "0", color: "black" }}
                 variant={"h5"}
               >
-                {title}
+                {todo.title}
               </Typography>
               <Typography gutterBottom sx={{ margin: "0 0 0 0",fontFamily:'Lato-Bold',lineHeight:'1.1',padding:'5px',textAlign:'start'}} variant={"h6"}>
-               {description}
+               {todo.description}
               </Typography>
             </Grid>
             <Grid
@@ -52,7 +58,7 @@ export default function Task({title,description}) {
                 fontFamily:'Loto'
               }}
             >
-              <IconButton className="icon">
+              <IconButton className={`icon `} onClick={()=>{handleTaskDone()}}>
                 <CheckCircleIcon  fontSize="large" />
               </IconButton>
               <IconButton className="icon">
