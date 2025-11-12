@@ -7,24 +7,25 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import { Divider } from "@mui/material";
 import Grid from "@mui/material/Grid";
-export default function Task({todo}) {
+export default function Task({ todo,handleCheckDone }) {
+  function handleTaskDone() {
+    handleCheckDone(todo.id)
 
-  function handleTaskDone(){
-      
- 
-  
   }
   return (
     <div>
       <Card
         sx={{
-          color: "white",
+          // color: "white",
           margin: "20px",
           bgcolor: "secondary.main",
           color: "primary.main",
         }}
       >
-        <CardContent sx={{ textAlign: "center" }} className={`${todo.isCompleted?'taskDone':''}`}>
+        <CardContent
+          sx={{ textAlign: "center" }}
+          className={`${todo.isCompleted ? "taskDone" : ""}`}
+        >
           <Grid
             container
             spacing={2}
@@ -45,8 +46,18 @@ export default function Task({todo}) {
               >
                 {todo.title}
               </Typography>
-              <Typography gutterBottom sx={{ margin: "0 0 0 0",fontFamily:'Lato-Bold',lineHeight:'1.1',padding:'5px',textAlign:'start'}} variant={"h6"}>
-               {todo.description}
+              <Typography
+                gutterBottom
+                sx={{
+                  margin: "0 0 0 0",
+                  fontFamily: "Lato-Bold",
+                  lineHeight: "1.1",
+                  padding: "5px",
+                  textAlign: "start",
+                }}
+                variant={"h6"}
+              >
+                {todo.description}
               </Typography>
             </Grid>
             <Grid
@@ -55,16 +66,21 @@ export default function Task({todo}) {
                 display: "flex",
                 justifyContent: "space-around",
                 alignItems: "center",
-                fontFamily:'Loto'
+                fontFamily: "Loto",
               }}
             >
-              <IconButton className={`icon `} onClick={()=>{handleTaskDone()}}>
-                <CheckCircleIcon  fontSize="large" />
+              <IconButton
+                className={`icon `}
+                onClick={() => {
+                  handleTaskDone();
+                }}
+              >
+                <CheckCircleIcon fontSize="large" />
               </IconButton>
               <IconButton className="icon">
-                <ModeEditIcon  fontSize="large" />
+                <ModeEditIcon fontSize="large" />
               </IconButton>
-              <IconButton className="icon" >
+              <IconButton className="icon">
                 <DeleteIcon fontSize="large" />
               </IconButton>
             </Grid>

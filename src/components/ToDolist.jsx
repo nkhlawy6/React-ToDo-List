@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
- import Container from "@mui/material/Container";
+import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import { v4 as uuidv4 } from "uuid";
 
@@ -57,7 +57,18 @@ export default function ToDoList() {
     setTodos([...todos, newTodo]);
     setTodoTitle("");
   }
-  console.log(todos);
+  function handleCheckDone(todoId) {
+    const doneTask = todos.map((t) => {
+      if (t.id == todoId) {
+        t.isCompleted = !t.isCompleted
+  
+      }
+      return t;
+    });
+    setTodos(doneTask);
+    console.log(doneTask);
+  }
+
   return (
     <>
       <CssBaseline />
@@ -97,7 +108,13 @@ export default function ToDoList() {
 
             {/* all tasks */}
             {todos.map((todo) => {
-              return <Task key={todo.id} todo={todo}   />;
+              return (
+                <Task
+                  key={todo.id}
+                  todo={todo}
+                  handleCheckDone={handleCheckDone}
+                />
+              );
             })}
             {/*---------end all tasks */}
 
