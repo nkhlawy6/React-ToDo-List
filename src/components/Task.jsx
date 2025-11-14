@@ -7,11 +7,30 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import { Divider } from "@mui/material";
 import Grid from "@mui/material/Grid";
-export default function Task({ todo,handleCheckDone }) {
-  function handleTaskDone() {
-    handleCheckDone(todo.id)
 
+import { TodosContext } from "../context/TodosContext";
+import { useContext } from "react";
+export default function Task({todo}) {
+  const {todos,setTodos}=useContext(TodosContext)
+console.log(todos);
+  function handleTaskDone() {
+      const doneTask = todos.map((t) => {
+        if (t.id == todo.id) {
+          t.isCompleted = !t.isCompleted
+    
+        }
+        return t;
+      });
+      setTodos(doneTask);
+    
   }
+
+
+
+
+
+
+  
   return (
     <div>
       <Card
@@ -44,7 +63,7 @@ export default function Task({ todo,handleCheckDone }) {
                 sx={{ margin: "0", color: "black" }}
                 variant={"h5"}
               >
-                {todo.title}
+               {todo.title}
               </Typography>
               <Typography
                 gutterBottom

@@ -2,7 +2,6 @@ import { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
-import { v4 as uuidv4 } from "uuid";
 
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
@@ -16,35 +15,12 @@ import { Divider } from "@mui/material";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Task from "./Task";
+import { TodosContext } from "../context/TodosContext";
+import { useContext } from "react";
+import { v4 as uuidv4 } from "uuid";
 export default function ToDoList() {
-  const todosDataBase = [
-    {
-      id: uuidv4(),
-      title: "Buy groceries",
-      description: "Milk, bread, eggs, and some fruits",
-      isCompleted: false,
-    },
-    {
-      id: uuidv4(),
-      title: "Finish React project",
-      description:
-        "Complete the to-do list UI and connect it with local storage",
-      isCompleted: true,
-    },
-    {
-      id: uuidv4(),
-      title: "Workout session",
-      description: "30 minutes of cardio and light stretching",
-      isCompleted: false,
-    },
-    {
-      id: uuidv4(),
-      title: "Read a book",
-      description: "Read 20 pages of 'Atomic Habits'",
-      isCompleted: false,
-    },
-  ];
-  const [todos, setTodos] = useState(todosDataBase);
+  const { todos, setTodos } = useContext(TodosContext);
+
   const [todoTitle, setTodoTitle] = useState("");
 
   function handleSendClick() {
@@ -56,17 +32,6 @@ export default function ToDoList() {
     };
     setTodos([...todos, newTodo]);
     setTodoTitle("");
-  }
-  function handleCheckDone(todoId) {
-    const doneTask = todos.map((t) => {
-      if (t.id == todoId) {
-        t.isCompleted = !t.isCompleted
-  
-      }
-      return t;
-    });
-    setTodos(doneTask);
-    console.log(doneTask);
   }
 
   return (
@@ -108,13 +73,7 @@ export default function ToDoList() {
 
             {/* all tasks */}
             {todos.map((todo) => {
-              return (
-                <Task
-                  key={todo.id}
-                  todo={todo}
-                  handleCheckDone={handleCheckDone}
-                />
-              );
+              return <Task key={todo.id} todo={todo} />;
             })}
             {/*---------end all tasks */}
 
@@ -125,7 +84,7 @@ export default function ToDoList() {
                   value={todoTitle}
                   onChange={(e) => {
                     setTodoTitle(e.target.value);
-                    console.log(todoTitle);
+                    
                   }}
                   sx={{
                     width: "100%",
