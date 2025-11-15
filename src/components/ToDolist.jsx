@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
@@ -30,10 +30,16 @@ export default function ToDoList() {
       description: "to Eslammmm",
       isCompleted: false,
     };
-    setTodos([...todos, newTodo]);
+    const newTodos = [...todos, newTodo];
+    setTodos(newTodos);
+    localStorage.setItem("todos", JSON.stringify(newTodos));
     setTodoTitle("");
   }
 
+  useEffect(() => {
+    const storageTodos = JSON.parse(localStorage.getItem("todos"));
+    setTodos(storageTodos);
+  },[]);
   return (
     <>
       <CssBaseline />
@@ -84,7 +90,6 @@ export default function ToDoList() {
                   value={todoTitle}
                   onChange={(e) => {
                     setTodoTitle(e.target.value);
-                    
                   }}
                   sx={{
                     width: "100%",
