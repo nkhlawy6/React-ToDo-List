@@ -52,6 +52,9 @@ function App() {
     typography: {
       fontFamily: "Lato",
     },
+    btnColor:{
+      color:'lightBlue'
+    }
   });
 
   return (

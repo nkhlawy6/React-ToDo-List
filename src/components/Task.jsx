@@ -20,8 +20,11 @@ export default function Task({ todo }) {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
   const { todos, setTodos } = useContext(TodosContext);
-  const [updatedTodo, setUpdatedTodo] = useState({ title:'', description:'' });
-  console.log(todos);
+  const [updatedTodo, setUpdatedTodo] = useState({
+    title: "",
+    description: "",
+  });
+
   function handleTaskDone() {
     const doneTask = todos.map((t) => {
       if (t.id == todo.id) {
@@ -30,7 +33,7 @@ export default function Task({ todo }) {
       return t;
     });
     setTodos(doneTask);
-    localStorage.setItem('todos',JSON.stringify(doneTask))
+    localStorage.setItem("todos", JSON.stringify(doneTask));
   }
 
   function handleOpenDeleteDialog() {
@@ -47,7 +50,7 @@ export default function Task({ todo }) {
     });
 
     setTodos(updatedTodos);
-    localStorage.setItem('todos',JSON.stringify(updatedTodos))
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
   }
 
   function handleOpenUpdateDialog() {
@@ -59,18 +62,21 @@ export default function Task({ todo }) {
   }
 
   function handleUpdateTask() {
-    const updatedTodos=todos.map((t) => { 
-      if(t.id==todo.id){
-        return {...t,title:updatedTodo.title,description:updatedTodo.description}
-      }else{
-        return t
+    const updatedTodos = todos.map((t) => {
+      if (t.id == todo.id) {
+        return {
+          ...t,
+          title: updatedTodo.title,
+          description: updatedTodo.description,
+        };
+      } else {
+        return t;
       }
+    });
 
-     })
-
-     setTodos(updatedTodos)
-     localStorage.setItem('todos',JSON.stringify(updatedTodos))
-    handleCloseUpdateDialog()
+    setTodos(updatedTodos);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+    handleCloseUpdateDialog();
   }
 
   return (
@@ -119,9 +125,25 @@ export default function Task({ todo }) {
           {"Update your task."}
         </DialogTitle>
         <DialogContent>
-          <TextField id="standard-basic" label="Title" variant="standard" value={updatedTodo.title} onChange={(e)=>{setUpdatedTodo({...updatedTodo,title:e.target.value})}} />
+          <TextField
+            id="standard-basic"
+            label="Title"
+            variant="standard"
+            value={updatedTodo.title}
+            onChange={(e) => {
+              setUpdatedTodo({ ...updatedTodo, title: e.target.value });
+            }}
+          />
           <Divider />
-          <TextField id="standard-basic" label="Details" variant="standard" value={updatedTodo.description} onChange={(e)=>{setUpdatedTodo({...updatedTodo,description:e.target.value})}} />
+          <TextField
+            id="standard-basic"
+            label="Details"
+            variant="standard"
+            value={updatedTodo.description}
+            onChange={(e) => {
+              setUpdatedTodo({ ...updatedTodo, description: e.target.value });
+            }}
+          />
         </DialogContent>
         <DialogActions>
           <Button
