@@ -16,8 +16,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import { TodosContext } from "../context/TodosContext";
 import { useContext, useState } from "react";
-export default function Task({ todo }) {
-  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+export default function Task({ todo,showDeleteDialog }) {
   const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
   const { todos, setTodos } = useContext(TodosContext);
   const [updatedTodo, setUpdatedTodo] = useState({
@@ -37,21 +36,11 @@ export default function Task({ todo }) {
   }
 
   function handleOpenDeleteDialog() {
-    setOpenDeleteDialog(true);
+  showDeleteDialog(todo)
   }
 
-  function handleCloseDeleteDialog() {
-    setOpenDeleteDialog(false);
-  }
 
-  function handleDeleteTask() {
-    const updatedTodos = todos.filter((t) => {
-      return t.id != todo.id;
-    });
 
-    setTodos(updatedTodos);
-    localStorage.setItem("todos", JSON.stringify(updatedTodos));
-  }
 
   function handleOpenUpdateDialog() {
     setOpenUpdateDialog(true);
@@ -81,38 +70,7 @@ export default function Task({ todo }) {
 
   return (
     <div>
-      {/* delete dialog  */}
-      <Dialog
-        onClose={handleCloseDeleteDialog}
-        open={openDeleteDialog}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title" sx={{ color: "red" }}>
-          {"🗑️ Are you sure you want to delete this task?"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            🗑️ This action is irreversible. You cannot restore this task after
-            deletion.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleCloseDeleteDialog}
-            sx={{ backgroundColor: "green", color: "white" }}
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={handleDeleteTask}
-            autoFocus
-            sx={{ backgroundColor: "red", color: "white" }}
-          >
-            Yes
-          </Button>
-        </DialogActions>
-      </Dialog>
+    
 
       {/* update dialog  */}
       <Dialog

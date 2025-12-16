@@ -19,6 +19,13 @@ import { TodosContext } from "../context/TodosContext";
 import { useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { yellow } from "@mui/material/colors";
+//dialog
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+
 export default function ToDoList() {
   const { todos, setTodos } = useContext(TodosContext);
 
@@ -51,7 +58,7 @@ export default function ToDoList() {
   const notCompletedTodos = useMemo(() => {
     return todos.filter((t) => !t.isCompleted);
   }, [todos]);
-/*
+  /*
 Meaning:
   React, filter this huge list only when todos changes.
   If the component re-renders for other reasons, don’t filter again
@@ -68,8 +75,60 @@ Meaning:
   function todosTypeState(e) {
     setTodosType(e.target.value);
   }
+
+  //dialog handlers
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [todoTask, setTodoTask] = useState(null);
+  function showDeleteDialog(todoTask) {
+    setTodoTask(todoTask);
+    setOpenDeleteDialog(true);
+  }
+  function handleCloseDeleteDialog() {
+    setOpenDeleteDialog(false);
+  }
+
+  function handleDeleteTask() {
+    const updatedTodos = todos.filter((t) => {
+      return t.id != todoTask.id;
+    });
+    setTodos(updatedTodos);
+    localStorage.setItem("todos", JSON.stringify(updatedTodos));
+      setOpenDeleteDialog(false);
+  }
   return (
     <>
+      {/* delete dialog  */}
+      <Dialog
+        onClose={handleCloseDeleteDialog}
+        open={openDeleteDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title" sx={{ color: "red" }}>
+          {"🗑️ Are you sure you want to delete this task?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            🗑️ This action is irreversible. You cannot restore this task after
+            deletion.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleCloseDeleteDialog}
+            sx={{ backgroundColor: "green", color: "white" }}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleDeleteTask}
+            autoFocus
+            sx={{ backgroundColor: "red", color: "white" }}
+          >
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
       <CssBaseline />
       <Container
         maxWidth="sm"
@@ -112,7 +171,13 @@ Meaning:
 
             {/* all tasks */}
             {todosToPresent.map((todo) => {
-              return <Task key={todo.id} todo={todo} />;
+              return (
+                <Task
+                  key={todo.id}
+                  todo={todo}
+                  showDeleteDialog={showDeleteDialog}
+                />
+              );
             })}
             {/*---------end all tasks */}
 
